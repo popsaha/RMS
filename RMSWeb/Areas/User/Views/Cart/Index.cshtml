@@ -1,0 +1,61 @@
+﻿@model RMS.Models.ViewModels.PurchaseOrderCartVM
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Order Cart</h5>
+
+        <!-- Table with hoverable rows -->
+        <table class="table ">
+            <thead>
+                <tr>
+                    @* <th scope="col">Sl.No</th> *@
+                    <th scope="col">Name</th>
+                    <th scope="col">Count</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Remove</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.PurchaseOrderCartList)
+                {
+                    <tr>
+                        @* <th scope="row"> </th> *@
+                        <td>@item.Product.Description</td>
+                        <td>@item.Count</td>
+                        <td>
+                            <a asp-action="plus" asp-route-cartId="@item.Id" class="btn btn-primary bg-gradient py-2">
+                                <i class="bi bi-plus-square"></i>
+                            </a>
+                            <a asp-action="minus" asp-route-cartId="@item.Id" class="btn btn-primary bg-gradient py-2">
+                                <i class="bi bi-dash-square"></i>
+                                @* <i class='bx bxs-minus-square'></i> *@
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-action="Remove" asp-route-cartId="@item.Id" class="btn btn-danger bg-gradient py-2">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+        <!-- End Table with hoverable rows -->
+
+    </div>
+    <div class="d-grid gap-2 m-3 text-center">
+        <a asp-action="OrderSummary">            
+            <button class="btn btn-primary" type="button">Order Summay</button>
+        </a>
+    </div>
+
+   @*  <div class="col-12 col-md-4 text-center">
+        <a asp-action="OrderSummary">
+            <button type="submit" value="Place Order" class="btn btn-primary form-control">Place Order</button>
+        </a>
+        
+    </div> *@
+</div>
