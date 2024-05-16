@@ -3,19 +3,31 @@ using RMS.DataAccess.Repository.IRepository;
 
 namespace RMS.DataAccess.Repository
 {
-    public class UnitOfWork : IUnitOfWork
-    {
-        private ApplicationDbContext _db;
-        public IProductRepository Product { get; private set; }
-        public UnitOfWork(ApplicationDbContext db)
-        {
-            _db = db;
-            Product = new ProductRepository(_db);
-        }
+	public class UnitOfWork : IUnitOfWork
+	{
+		private ApplicationDbContext _db;
+		public IProductRepository Product { get; private set; }
+		public IStoreRepository Store { get; private set; }
+		public IPurchaseOrderCartRepository OrderCart { get; private set; }
+		public IApplicationUserRepository ApplicationUser { get; private set; }
+		public IPurchaseOrderHeaderRepository OrderHeader { get; private set; }
+		public IPurchaseOrderItemRepository OrderItem { get; private set; }
 
-        public void Save()
-        {
-            _db.SaveChanges();
-        }
-    }
+		public UnitOfWork(ApplicationDbContext db)
+		{
+			_db = db;
+			Product = new ProductRepository(_db);
+			Store = new StoreRepository(_db);
+			ApplicationUser = new ApplicationUserRepository(_db);
+			OrderCart = new PurchaseOrderCartRepository(_db);
+			Product = new ProductRepository(_db);
+			OrderHeader = new PurchaseOrderHeaderRepository(_db);
+			OrderItem = new PurchaseOrderItemRepository(_db);
+		}
+
+		public void Save()
+		{
+			_db.SaveChanges();
+		}
+	}
 }

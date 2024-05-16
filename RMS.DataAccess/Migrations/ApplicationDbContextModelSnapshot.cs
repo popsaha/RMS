@@ -354,6 +354,74 @@ namespace RMS.DataAccess.Migrations
                     b.ToTable("PurchaseOrderCarts");
                 });
 
+            modelBuilder.Entity("RMS.Models.PurchaseOrderHeader", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Budget")
+                        .HasColumnType("float");
+
+                    b.Property<DateOnly>("ExpectedDelivery")
+                        .HasColumnType("date");
+
+                    b.Property<string>("OrderStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("ReferenceDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ReferenceNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Store")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("PurchaseOrderHeaders");
+                });
+
+            modelBuilder.Entity("RMS.Models.PurchaseOrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderHeaderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderHeaderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("PurchaseOrderItems");
+                });
+
             modelBuilder.Entity("RMS.Models.Store", b =>
                 {
                     b.Property<int>("Id")
@@ -488,6 +556,36 @@ namespace RMS.DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("RMS.Models.PurchaseOrderHeader", b =>
+                {
+                    b.HasOne("RMS.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("RMS.Models.PurchaseOrderItem", b =>
+                {
+                    b.HasOne("RMS.Models.PurchaseOrderHeader", "PurchaseOrderHeader")
+                        .WithMany("PurchaseOrderItems")
+                        .HasForeignKey("OrderHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RMS.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("PurchaseOrderHeader");
+                });
+
             modelBuilder.Entity("RMS.Models.ApplicationUser", b =>
                 {
                     b.HasOne("RMS.Models.Store", "Store")
@@ -495,6 +593,11 @@ namespace RMS.DataAccess.Migrations
                         .HasForeignKey("StoreId");
 
                     b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("RMS.Models.PurchaseOrderHeader", b =>
+                {
+                    b.Navigation("PurchaseOrderItems");
                 });
 #pragma warning restore 612, 618
         }

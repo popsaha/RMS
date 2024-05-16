@@ -31,7 +31,7 @@
 									<label>Request No</label>
 								</div>
 								<div class="col-9">
-									<input asp-for="PurchaseOrderHeader.RequestNo" class="form-control" />
+									<input asp-for="PurchaseOrderHeader.RequestNo" class="form-control" readonly/>
 									<span asp-validation-for="PurchaseOrderHeader.RequestNo" class="text-danger"></span>
 								</div>
 							</div>
@@ -40,8 +40,8 @@
 									<label>Store</label>
 								</div>
 								<div class="col-9">
-									<input asp-for="PurchaseOrderHeader.StoreId" class="form-control" />
-									<span asp-validation-for="PurchaseOrderHeader.StoreId" class="text-danger"></span>
+									<input asp-for="PurchaseOrderHeader.Store" class="form-control" readonly />
+									<span asp-validation-for="PurchaseOrderHeader.Store" class="text-danger"></span>
 								</div>
 							</div>
 							<div class="row my-1">
@@ -58,8 +58,8 @@
 									<label>Reference Date</label>
 								</div>
 								<div class="col-9">
-									<input asp-for="PurchaseOrderHeader.RefernceDate" class="form-control" type="date" id="refDate" name="selectedDate" />
-									<span asp-validation-for="PurchaseOrderHeader.RefernceDate" class="text-danger"></span>
+									<input asp-for="PurchaseOrderHeader.ReferenceDate" class="form-control" type="date" id="refDate" name="selectedDate" />
+									<span asp-validation-for="PurchaseOrderHeader.ReferenceDate" class="text-danger"></span>
 								</div>
 							</div>
 							
@@ -69,26 +69,18 @@
 							<h4 class="d-flex justify-content-between align-items-center mb-3">
 								<span class="text-info">Order Summary:</span>
 							</h4>
-							<ul class="list-group mb-3">
-								@foreach (var item in Model.PurchaseOrderCartList)
+							<ul class="list-group mb-3">							
+								
+								@foreach (var details in Model.PurchaseOrderCartList)
 								{
 									<li class="list-group-item d-flex justify-content-between">
-										@* <div>
-									<h6 class="my-0">Product Name</h6>
-									<small class="text-muted">Quantity: Count</small>
-									</div> *@
-										<h6 class="my-0">@item.Product.Description</h6>
-										<h6 class="my-0">Quantity: @item.Count</h6>
-										@* <span class="text-muted">Quantity: Count </span> *@
+										<div>
+											<h6 class="my-0">@details.Product.Description</h6>
+											<small class="text-muted">Number: @details.Product.Number</small>
+										</div>
+										<span class="text-muted">Count: @details.Count </span>
 									</li>
 								}
-								
-
-
-								@* <li class="list-group-item d-flex justify-content-between bg-light">
-									<small class="text-info">Total (USD)</small>
-									<strong class="text-info">$$</strong>
-								</li> *@
 							</ul>
 						</div>
 					</div>
@@ -98,8 +90,8 @@
 				<div class="row">
 					<div class="col-12 col-md-8 pt-2">
 						<p style="color:maroon; font-size:14px;">
-							Estimate Arrival Date:
-
+							Estimate Quotation Date:
+							@DateTime.Now.AddDays(7).ToShortDateString() - @DateTime.Now.AddDays(14).ToShortDateString()
 						</p>
 					</div>
 					<div class="col-12 col-md-4">
