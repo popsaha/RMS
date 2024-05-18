@@ -422,6 +422,39 @@ namespace RMS.DataAccess.Migrations
                     b.ToTable("PurchaseOrderItems");
                 });
 
+            modelBuilder.Entity("RMS.Models.Quotation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PurchaseOrderHeaderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("QuotationNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RequestNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PurchaseOrderHeaderId");
+
+                    b.ToTable("Quotations");
+                });
+
             modelBuilder.Entity("RMS.Models.Store", b =>
                 {
                     b.Property<int>("Id")
@@ -582,6 +615,17 @@ namespace RMS.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+
+                    b.Navigation("PurchaseOrderHeader");
+                });
+
+            modelBuilder.Entity("RMS.Models.Quotation", b =>
+                {
+                    b.HasOne("RMS.Models.PurchaseOrderHeader", "PurchaseOrderHeader")
+                        .WithMany()
+                        .HasForeignKey("PurchaseOrderHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("PurchaseOrderHeader");
                 });

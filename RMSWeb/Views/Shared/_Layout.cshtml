@@ -232,8 +232,8 @@
                 <!-- End Messages Nav -->
                 <li class="nav-item">
                     <a class="nav-link nav-icon" asp-area="User" asp-controller="Cart" asp-action="Index">
-                        <i class="bi bi-cart3"></i> @* &nbsp; (0) *@
-                        @* <span class="badge bg-primary badge-number">4</span> *@
+                        <i class="bi bi-cart3"></i> 
+                        <span class="badge bg-primary badge-number">4</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown pe-3">
@@ -414,35 +414,23 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a asp-area="User" asp-controller="Quotation" asp-action="QuotationIndex">
                             <i class="bi bi-circle"></i><span>Quotation Approval Overview</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Quotation Details</span>
-                        </a>
-                    </li>
+                   
                     <li>
                         <a href="#">
                             <i class="bi bi-circle"></i><span>Goods Receipt Overview</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Goods Receipt Confirmation</span>
-                        </a>
-                    </li>
+                   
                     <li>
                         <a href="#">
                             <i class="bi bi-circle"></i><span>Invoice Overview</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bi bi-circle"></i><span>Invoice Confirmation</span>
-                        </a>
-                    </li>
+                   
                 </ul>
             </li>
 

@@ -11,29 +11,54 @@ namespace RMSWeb.Areas.User.Controllers
     {
         private readonly IProductRepository _productRepo;
         private readonly IPurchaseOrderCartRepository _cartRepo;
-        public ProductController(IProductRepository productRepo, IPurchaseOrderCartRepository cartRepo)
+        private readonly ILogger<ProductController> _logger;
+        public ProductController(IProductRepository productRepo, IPurchaseOrderCartRepository cartRepo, ILogger<ProductController> logger)
         {
             _productRepo = productRepo;
             _cartRepo = cartRepo;
-
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
-            List<Product> productList = _productRepo.GetAll().ToList();
-            return View(productList);
+            try
+            {
+                List<Product> productList = _productRepo.GetAll().ToList();
+                return View(productList);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                _logger.LogError(ex, "An error occurred while getting the product list.");
+
+                // Return a generic error message
+                return Content("An error occurred while getting the product list. Please try again later.");
+            }
+
         }
 
         public IActionResult Details(int productId)
         {
-            PurchaseOrderCart orderCart = new()
+            try
             {
-                Product = _productRepo.Get(u => u.Id == productId),
-                Count = 1,
-                ProductId = productId
-            };
+                PurchaseOrderCart orderCart = new()
+                {
+                    Product = _productRepo.Get(u => u.Id == productId),
+                    Count = 1,
+                    ProductId = productId
+                };
 
-            return View(orderCart);
+                return View(orderCart);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                _logger.LogError(ex, "An error occurred while getting the product details list.");
+
+                // Return a generic error message
+                return Content("An error occurred while getting the product list. Please try again later.");
+            }
+
         }
 
         [HttpPost]

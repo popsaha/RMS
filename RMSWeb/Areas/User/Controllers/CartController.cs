@@ -80,7 +80,7 @@ namespace RMSWeb.Areas.User.Controllers
             PurchaseOrderCartVM.PurchaseOrderHeader.ApplicationUserId = userId;
 
             //if(InquiryAPI is success) - see below method
-            PurchaseOrderCartVM.PurchaseOrderHeader.OrderStatus = SD.StatusApproved;
+            PurchaseOrderCartVM.PurchaseOrderHeader.OrderStatus = SD.StatusInProcess;
 
             _unitOfWork.OrderHeader.Add(PurchaseOrderCartVM.PurchaseOrderHeader);
             _unitOfWork.Save();

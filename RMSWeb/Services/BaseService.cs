@@ -49,7 +49,7 @@ namespace RMSWeb.Services
                 HttpResponseMessage apiResponse = null;
                 apiResponse = await client.SendAsync(httpRequestMessage);
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
-                var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
+                var APIResponse = JsonConvert.DeserializeObject<T>(apiContent); //depends on the SAP response.
                 return APIResponse;
             }
             catch (Exception e)

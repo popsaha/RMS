@@ -64,24 +64,6 @@ namespace RMS.DataAccess.Repository
 
         }
 
-        //public T Get(System.Linq.Expressions.Expression<Func<T, bool>> filter, bool tracked = false)
-        //{
-        //    IQueryable<T> query;
-
-        //    if (tracked)
-        //    {
-        //        query = dbSet;
-        //    }
-        //    else
-        //    {
-        //        query = dbSet.AsNoTracking();
-        //    }
-
-        //    query = query.Where(filter);
-        //    return query.FirstOrDefault();
-
-        //}
-
         public void Remove(T entity)
         {
             dbSet.Remove(entity);
