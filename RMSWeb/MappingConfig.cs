@@ -11,6 +11,8 @@ namespace RMSWeb
             CreateMap<Quotation, QuotationDTO>().ReverseMap();
 
             CreateMap<Quotation, QuotationCreateDTO>().ReverseMap();
+
+            CreateMap<GoodsIssue, GoodsIssueCreateDTO>().ReverseMap();
         }
     }
 }

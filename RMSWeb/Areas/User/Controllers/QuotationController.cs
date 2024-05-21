@@ -47,6 +47,7 @@ namespace RMSWeb.Areas.User.Controllers
         [HttpPost]
         public IActionResult QuotationIndexPost(int id, string status)
         {
+            //need to send Proof of delivery to SAP API
             try
             {
                 var quotation = _unitOfWork.Quotation.Get(u => u.Id == id);
@@ -78,7 +79,7 @@ namespace RMSWeb.Areas.User.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<APIResponse> CreateVilla([FromBody] QuotationCreateDTO createDTO)
+        public ActionResult<APIResponse> CreateQuotation([FromBody] QuotationCreateDTO createDTO)
         {
             try
             {

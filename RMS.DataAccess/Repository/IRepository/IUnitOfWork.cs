@@ -9,6 +9,7 @@
         IPurchaseOrderHeaderRepository OrderHeader { get; }
         IPurchaseOrderItemRepository OrderItem { get; }
         IQuotationRepository Quotation { get; }
+        IGoodsIssueRepository GoodsIssue { get; }
 
         void Save();
     }

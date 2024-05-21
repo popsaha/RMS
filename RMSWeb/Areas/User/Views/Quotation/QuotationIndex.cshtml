@@ -7,7 +7,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Product Overview</h5>
+                    <h5 class="card-title">Quotation Overview</h5>
 
                     <!-- Table with stripped rows -->
                     <table class="table datatable">
@@ -48,7 +48,7 @@
 
                                             <form method="post" asp-action="QuotationIndexPost" asp-controller="Quotation" class="d-inline">
                                                 <input type="hidden" name="id" value="@quotation.Id" />
-                                                <input type="hidden" name="status" value="@SD.StatusApproved" />
+                                                <input type="hidden" name="status" value="@SD.StatusInProcess" />
                                                 <button type="submit" class="btn btn-success btn-sm">Approve</button>
                                             </form>
                                             <form method="post" asp-action="QuotationIndexPost" asp-controller="Quotation" class="d-inline">

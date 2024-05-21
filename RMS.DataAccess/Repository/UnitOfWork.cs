@@ -13,6 +13,7 @@ namespace RMS.DataAccess.Repository
         public IPurchaseOrderHeaderRepository OrderHeader { get; private set; }
         public IPurchaseOrderItemRepository OrderItem { get; private set; }
         public IQuotationRepository Quotation { get; private set; }
+        public IGoodsIssueRepository GoodsIssue { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -25,6 +26,7 @@ namespace RMS.DataAccess.Repository
             OrderHeader = new PurchaseOrderHeaderRepository(_db);
             OrderItem = new PurchaseOrderItemRepository(_db);
             Quotation = new QuotationRepository(_db);
+            GoodsIssue = new GoodsIssueRepository(_db);
         }
 
         public void Save()

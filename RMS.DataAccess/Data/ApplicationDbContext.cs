@@ -19,6 +19,7 @@ namespace RMS.DataAccess.Data
         public DbSet<PurchaseOrderHeader> PurchaseOrderHeaders { get; set; }
         public DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
+        public DbSet<GoodsIssue> GoodsIssues { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
